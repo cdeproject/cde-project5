@@ -33,20 +33,15 @@ jobs:
       - image: ubuntu:20.04
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            - v1-dependencies-
       - run:
           name: install docker
           command: |
-            apt update
+            apt update && DEBIAN_FRONTEND=noninteractive
             apt install -y python3-pip python3-venv
             python3 -V
             echo "===== install docker ====="
             # python3 -m venv venv
             # . venv/bin/activate
-            DEBIAN_FRONTEND=noninteractive
             apt install apt-transport-https ca-certificates curl software-properties-common -y
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
             add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
@@ -54,10 +49,6 @@ jobs:
             apt install docker-ce -y
             systemctl status docker
             docker --version
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
       # - run:
       #     name: upload docker
       #     command: |
