@@ -56,3 +56,4 @@ workflows:
   default:
     jobs:
       - lint
+      - upload-docker
