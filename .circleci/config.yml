@@ -42,16 +42,17 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
+            cat /etc/os-release
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
-      - run:
-          name: upload docker
-          command: |
-            . venv/bin/activate
-            chmod +x upload_docker.sh
-            ./upload_docker.sh
+      # - run:
+      #     name: upload docker
+      #     command: |
+      #       . venv/bin/activate
+      #       chmod +x upload_docker.sh
+      #       ./upload_docker.sh
 
 workflows:
   default:
