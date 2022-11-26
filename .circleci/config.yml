@@ -50,6 +50,7 @@ jobs:
           name: upload docker
           command: |
             . venv/bin/activate
+            chmod +x upload_docker.sh
             ./upload_docker.sh
 
 workflows:
@@ -57,3 +58,4 @@ workflows:
     jobs:
       - lint
       - upload-docker
+          requires: [lint]
