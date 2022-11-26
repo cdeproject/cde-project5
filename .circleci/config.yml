@@ -30,29 +30,29 @@ jobs:
 
   upload-docker:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu-2204:2022.04.2
     steps:
       - checkout
-      - run:
-          name: install dependencies
-          command: |
-            apt update
-            apt install -y python3-pip python3-venv
-            python3 -V
-            export DEBIAN_FRONTEND=noninteractive
-            apt-get install -y tzdata
-            ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-            dpkg-reconfigure --frontend noninteractive tzdata
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       apt update
+      #       apt install -y python3-pip python3-venv
+      #       python3 -V
+      #       export DEBIAN_FRONTEND=noninteractive
+      #       apt-get install -y tzdata
+      #       ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+      #       dpkg-reconfigure --frontend noninteractive tzdata
       - run:
           name: install docker
           command: |        
-            echo "===== install docker ====="
-            apt install apt-transport-https ca-certificates curl software-properties-common -y
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-            apt-cache policy docker-ce
-            apt install docker-ce -y
-            systemctl status docker
+            # echo "===== install docker ====="
+            # apt install apt-transport-https ca-certificates curl software-properties-common -y
+            # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+            # add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+            # apt-cache policy docker-ce
+            # apt install docker-ce -y
+            # systemctl status docker
             docker --version
       # - run:
       #     name: upload docker
@@ -64,6 +64,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - lint
-      - upload-docker:
-          requires: [lint]
+      # - lint
+      # - upload-docker:
+      #     requires: [lint]
+      - upload-docker
