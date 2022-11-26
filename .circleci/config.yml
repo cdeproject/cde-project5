@@ -40,6 +40,9 @@ jobs:
             apt install -y python3-pip python3-venv
             python3 -V
             export DEBIAN_FRONTEND=noninteractive
+            apt-get install -y tzdata
+            ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+            dpkg-reconfigure --frontend noninteractive tzdata
       - run:
           name: install docker
           command: |        
