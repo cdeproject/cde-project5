@@ -14,15 +14,15 @@
     echo "pwd"
     pwd
 
-- name: Copy backend page
-  copy:
-    src: "/root/project/artifact.tar.gz"
-    dest: "~/web/artifact.tar.gz"
-    backup: yes
+# - name: Copy backend page
+#   copy:
+#     src: "/root/project/artifact.tar.gz"
+#     dest: "~/web/artifact.tar.gz"
+#     backup: yes
 
-- name: Executing node
-  shell: |
-    cd ~/web
-    tar -xzf artifact.tar.gz
-    pwd
-    ls -la
+# - name: Executing node
+#   shell: |
+#     cd ~/web
+#     tar -xzf artifact.tar.gz
+#     pwd
+#     ls -la
