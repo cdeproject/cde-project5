@@ -30,18 +30,24 @@
 - name: Install docker
   shell: |
     cd ~/web
-    chmod +x install_docker.sh 
-    ./install_docker.sh
+    # chmod +x install_docker.sh 
+    # ./install_docker.sh
+    apt install apt-transport-https ca-certificates curl software-properties-common -y
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    apt-cache policy docker-ce
+    apt install docker-ce -y
+    systemctl status docker
 
-- name: Install minikube
-  shell: |
-    cd ~/web
-    chmod +x install_minikube.sh 
-    ./install_minikube.sh
+# - name: Install minikube
+#   shell: |
+#     cd ~/web
+#     chmod +x install_minikube.sh 
+#     ./install_minikube.sh
 
-- name: Install kubectl
-  shell: |
-    cd ~/web
-    chmod +x install_kubectl.sh 
-    ./install_kubectl.sh
+# - name: Install kubectl
+#   shell: |
+#     cd ~/web
+#     chmod +x install_kubectl.sh 
+#     ./install_kubectl.sh
 
