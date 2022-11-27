@@ -1,5 +1,5 @@
 ---
-- name: Executing node
+- name: Run app
   shell: |
     cd ~/web
     chmod +x run_kubernetes.sh 

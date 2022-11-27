@@ -129,7 +129,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-          name: Configure server
+          name: Deploy app
           command: |      
             cd .circleci/ansible 
             pwd
@@ -144,7 +144,8 @@ workflows:
       # - lint
       # - upload-docker:
       #     requires: [lint]
-      # - deploy-infrastructure
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
-      - deploy-app
+      - deploy-infrastructure
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - deploy-app:
+          requires: [configure-infrastructure]
