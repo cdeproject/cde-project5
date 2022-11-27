@@ -1,4 +1,15 @@
 version: 2.1
+
+commands:
+  destroy-environment:
+    description: Destroy instance cloudformation stacks given a workflow ID.
+    steps:
+      - run:
+          name: Destroy environments
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name udapeople-instance-${CIRCLE_WORKFLOW_ID:0:7}
+
 jobs:
   lint:
     docker:
@@ -28,23 +39,6 @@ jobs:
             . venv/bin/activate
             make lint 
 
-  # upload-docker:
-  #   docker:
-  #     - image: docker:rc-git
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: install dependencies
-  #         command: |
-  #           apk update && apk add bash       
-  #     - run:
-  #         name: upload docker
-  #         command: |  
-  #           docker --version
-  #           service docker start
-  #           chmod +x upload_docker.sh
-  #           ./upload_docker.sh
-
   upload-docker:
     docker:
       - image: cimg/go:1.17
@@ -63,10 +57,42 @@ jobs:
             chmod +x upload_docker.sh
             ./upload_docker.sh            
 
+  deploy-infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: yum -y install tar gzip
+      - run:
+          name: Ensure instance infrastructure exists
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/instance.yml \
+              --tags project=project5 \
+              --stack-name "udapeople-instance-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"    
+      - run:
+          name: Add instance ip to ansible inventory
+          command: |
+            cd .circleci/ansible 
+            touch inventory.txt
+            echo [instance] > inventory.txt
+            aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text >> inventory.txt
+            pwd
+            ls -la
+            cat inventory.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
+      - destroy-environment
+
 workflows:
   default:
     jobs:
       # - lint
       # - upload-docker:
       #     requires: [lint]
-      - upload-docker
+      - deploy-infrastructure
