@@ -28,22 +28,40 @@ jobs:
             . venv/bin/activate
             make lint 
 
+  # upload-docker:
+  #   docker:
+  #     - image: docker:rc-git
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: install dependencies
+  #         command: |
+  #           apk update && apk add bash       
+  #     - run:
+  #         name: upload docker
+  #         command: |  
+  #           docker --version
+  #           service docker start
+  #           chmod +x upload_docker.sh
+  #           ./upload_docker.sh
+
   upload-docker:
     docker:
-      - image: docker:rc-git
+      - image: cimg/go:1.17
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
     steps:
       - checkout
-      - run:
-          name: install dependencies
-          command: |
-            apk update && apk add bash       
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true      
       - run:
           name: upload docker
           command: |  
             docker --version
-            service docker start
             chmod +x upload_docker.sh
-            ./upload_docker.sh
+            ./upload_docker.sh            
 
 workflows:
   default:
