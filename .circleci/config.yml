@@ -41,6 +41,7 @@ jobs:
           name: upload docker
           command: |  
             docker --version
+            systemctl start docker
             chmod +x upload_docker.sh
             ./upload_docker.sh
 
