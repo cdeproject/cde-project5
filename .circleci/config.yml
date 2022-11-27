@@ -2,13 +2,13 @@ version: 2.1
 
 commands:
   destroy-environment:
-    description: Destroy instance cloudformation stacks given a workflow ID.
+    description: Destroy backend cloudformation stacks given a workflow ID.
     steps:
       - run:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name udapeople-instance-${CIRCLE_WORKFLOW_ID:0:7}
+            aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
 
 jobs:
   lint:
@@ -64,19 +64,19 @@ jobs:
       - checkout
       - run: yum -y install tar gzip
       - run:
-          name: Ensure instance infrastructure exists
+          name: Ensure backend infrastructure exists
           command: |
             aws cloudformation deploy \
-              --template-file .circleci/files/instance.yml \
+              --template-file .circleci/files/backend.yml \
               --tags project=project5 \
-              --stack-name "udapeople-instance-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"    
       - run:
-          name: Add instance ip to ansible inventory
+          name: Add backend ip to ansible inventory
           command: |
             cd .circleci/ansible 
             touch inventory.txt
-            echo [instance] > inventory.txt
+            echo [backend] > inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> inventory.txt

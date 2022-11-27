@@ -4,15 +4,15 @@
   apt:
     upgrade: "yes"
 
-- name: Creates directory
-  file:
-    path: ~/web
-    state: directory
+# - name: Creates directory
+#   file:
+#     path: ~/web
+#     state: directory
 
-- name: Get path
-  shell: |
-    echo "pwd"
-    pwd
+# - name: Get path
+#   shell: |
+#     echo "pwd"
+#     pwd
 
 # - name: Copy backend page
 #   copy:
