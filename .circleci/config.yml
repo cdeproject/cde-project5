@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Configure server
           command: |
-            tar -czvf artifact.tar.gz app.py install_docker.sh install_minikube.sh install_kubectl.sh 
+            tar -czvf artifact.tar.gz app.py install_docker.sh install_minikube.sh install_kubectl.sh kubectl
             pwd
             ls -la         
             cd .circleci/ansible 
