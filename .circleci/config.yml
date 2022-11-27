@@ -38,6 +38,7 @@ jobs:
           command: |        
             docker --version
             chmod +x upload_docker.sh
+            ls -la
             ./upload_docker.sh
 
 workflows:
