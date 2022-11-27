@@ -33,33 +33,11 @@ jobs:
       - image: docker:rc-git
     steps:
       - checkout
-      # - run:
-      #     name: install dependencies
-      #     command: |
-      #       apt update
-      #       apt install -y python3-pip python3-venv
-      #       python3 -V
-      #       export DEBIAN_FRONTEND=noninteractive
-      #       apt-get install -y tzdata
-      #       ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-      #       dpkg-reconfigure --frontend noninteractive tzdata
       - run:
-          name: install docker
+          name: upload docker
           command: |        
-            # echo "===== install docker ====="
-            # apt install apt-transport-https ca-certificates curl software-properties-common -y
-            # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-            # add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-            # apt-cache policy docker-ce
-            # apt install docker-ce -y
-            # systemctl status docker
             docker --version
-      # - run:
-      #     name: upload docker
-      #     command: |
-      #       . venv/bin/activate
-      #       chmod +x upload_docker.sh
-      #       ./upload_docker.sh
+            ./upload_docker.sh
 
 workflows:
   default:
