@@ -19,4 +19,5 @@ podname=$(kubectl get pods -o name)
 
 # Step 4:
 # Forward the container port to a host
+sleep 60
 kubectl port-forward $podname --address 0.0.0.0 8000:80
