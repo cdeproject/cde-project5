@@ -35,7 +35,8 @@ jobs:
       - checkout
       - run:
           name: upload docker
-          command: |        
+          command: |  
+            apk update && apk add bash      
             docker --version
             chmod +x upload_docker.sh
             ls -la
