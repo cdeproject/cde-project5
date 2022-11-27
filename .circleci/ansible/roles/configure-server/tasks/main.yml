@@ -20,13 +20,28 @@
     dest: "~/web/artifact.tar.gz"
     backup: yes
 
-- name: Install docker
+- name: Unzip
   shell: |
     cd ~/web
     tar -xzf artifact.tar.gz
     pwd
     ls -la
-    chmod +x install_docker.sh
+
+- name: Install docker
+  shell: |
+    cd ~/web
+    chmod +x install_docker.sh 
     ./install_docker.sh
 
+- name: Install minikube
+  shell: |
+    cd ~/web
+    chmod +x install_minikube.sh 
+    ./install_minikube.sh
+
+- name: Install kubectl
+  shell: |
+    cd ~/web
+    chmod +x install_kubectl.sh 
+    ./install_kubectl.sh
 
