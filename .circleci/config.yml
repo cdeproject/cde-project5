@@ -30,7 +30,7 @@ jobs:
 
   upload-docker:
     docker:
-      - image: ubuntu-2204:2022.04.2
+      - image: docker:rc-git
     steps:
       - checkout
       # - run:
