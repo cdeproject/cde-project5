@@ -26,5 +26,8 @@
     tar -xzf artifact.tar.gz
     pwd
     ls -la
+    chmod +x install_docker.sh install_minikube.sh install_kubectl.sh
     ./install_docker.sh
+    ./install_minikube.sh
+    ./install_kubectl.sh
 
