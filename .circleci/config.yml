@@ -34,12 +34,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install dependencies
+          command: |
+            apk update && apk add bash       
+      - run:
           name: upload docker
           command: |  
-            apk update && apk add bash      
             docker --version
             chmod +x upload_docker.sh
-            ls -la
             ./upload_docker.sh
 
 workflows:
