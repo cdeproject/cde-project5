@@ -45,3 +45,8 @@
     chmod +x install_kubectl.sh 
     ./install_kubectl.sh
 
+- name: Start minikube
+  shell: |
+    minikube start --force
+    kubectl get nodes
+
