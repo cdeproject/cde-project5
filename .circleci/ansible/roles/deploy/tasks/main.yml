@@ -2,5 +2,6 @@
 - name: Run app
   shell: |
     cd ~/web
+    ls -la
     chmod +x run_kubernetes.sh 
     ./run_kubernetes.sh
