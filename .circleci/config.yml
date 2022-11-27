@@ -144,6 +144,7 @@ workflows:
       # - lint
       # - upload-docker:
       #     requires: [lint]
-      - deploy-infrastructure
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
+      # - deploy-infrastructure
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
+      - deploy-app
