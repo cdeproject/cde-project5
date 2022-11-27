@@ -20,14 +20,13 @@
     dest: "~/web/artifact.tar.gz"
     backup: yes
 
-- name: Install docker, minikube, kubectl
+- name: Install docker
   shell: |
     cd ~/web
     tar -xzf artifact.tar.gz
     pwd
     ls -la
-    chmod +x install_docker.sh install_minikube.sh install_kubectl.sh
+    chmod +x install_docker.sh
     ./install_docker.sh
-    ./install_minikube.sh
-    ./install_kubectl.sh
+
 
