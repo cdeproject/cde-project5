@@ -141,11 +141,11 @@ jobs:
 workflows:
   default:
     jobs:
-      # - lint
+      - lint
       # - upload-docker:
       #     requires: [lint]
-      - deploy-infrastructure
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - deploy-app:
-          requires: [configure-infrastructure]
+      # - deploy-infrastructure
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
+      # - deploy-app:
+      #     requires: [configure-infrastructure]
