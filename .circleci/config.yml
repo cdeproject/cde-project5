@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Configure server
           command: |
-            # tar -czf artifact.tar.gz .
+            tar -czvf artifact.tar.gz .
             pwd
             ls -la         
             cd .circleci/ansible 
